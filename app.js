@@ -1,32 +1,29 @@
-/* (async () => {
-    const response = await fetch('https://dummyjson.com/products')
-    const { products } = await response.json();
-    console.log(products)
-})(); */
-
+// Defineerin asünkroonse funktsiooni nimega getProductsData.
 async function getProductsData() {
+    // Defineerin muutuja nimega response, ootan ära vastuse API päringule ning salvestan muutujasse response.
     const response = await fetch('https://dummyjson.com/products');
+    // Ootame kuni response muudetakse JSON formaati ning võtame response seest 'key' nimega products ja salvestame samanimelisse muutujasse.
     const { products } = await response.json();
-
+    // Tagastab muutuja products.
     return products;
 }
-
+// Käivitab funktsiooni getProductsData.
 getProductsData();
-
-/* https://dummyjson.com/products/categories */
-
+// Defineerin asünkroonse funktsiooni nimega getProductsCategories.
 async function getProductCategories() {
+    // Defineerin muutuja nimega response, ootan ära vastuse API päringule ning salvestan muutujasse response.
     const response = await fetch('https://dummyjson.com/products/categories');
+    // Ootame kuni response muudetakse JSON formaati ning salvestame vastuse muutujasse data.
     const data = await response.json();
-
+    // Tagastab muuutuja nimega data.
     return data;
 }
 
-
+// Defineerin asünkroonse funktsiooni nimega createCategoryButtons
 async function createCategoryButtons() {
-    // Tee UI button elemente samapalju kui on kategooriaid
+    // Käivitan funktsiooni getProductCategories, mille vastuse ma ootan ära ning salvestan muutujasse categories.
     const categories = await getProductCategories();
-
+    // Võtan HTML dokumendist elemendi klassiga .category-list ning salvestan muutjasse categoryList.
     const categoryList = document.querySelector('.category-list');
     
     categories.forEach(category => {
@@ -38,7 +35,7 @@ async function createCategoryButtons() {
 }
 
 async function showProductList() {
-    // Näita tootelisti kategooria nuppude all.
+
     const products = await getProductsData();
 
     const productTablebodyElement = document.querySelector('.table-body');
